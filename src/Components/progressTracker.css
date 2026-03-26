@@ -1,0 +1,21 @@
+.progress-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+.progress{
+    position: absolute;
+    top: 9.8rem;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+.title{
+    margin-top: 1rem;
+}
+
+@media screen and (max-width: 1233px){
+    .progress{
+        top: 13rem;
+    }
+}

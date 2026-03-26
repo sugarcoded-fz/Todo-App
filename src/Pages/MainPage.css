@@ -1,0 +1,464 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+
+
+
+#title {
+    display: flex;
+    align-items: end;
+    gap: 0.5rem;
+    padding: 1rem;
+}
+
+#logo {
+    color: purple;
+    font-size: xx-large;
+}
+
+#logo-desc {
+    font-size: 0.9rem;
+}
+
+
+
+
+#content-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+#side-bar {
+    width: 30%;
+    height: 60vh;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+    padding: 0 1rem;
+}
+
+#main-content {
+    width: 50%;
+}
+
+#tracker {
+    width: 25%;
+    margin-top: 5%;
+    padding: 0 1rem;
+}
+
+
+
+
+#main-top {
+    height: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#main-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+#task-title {
+    font-size: larger;
+
+}
+
+
+
+#all-todos {
+    display: flex;
+    justify-content: space-between;
+}
+
+#todo-box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#showCompletedBox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#todos {
+    display: flex;
+    justify-content: space-between;
+    background-color: #cc8db3;
+    min-width: 17rem;
+    border-radius: 10px;
+    padding: 5px 0;
+}
+
+#todo-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#todo-left {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 10px;
+    font-size: large;
+}
+
+#todo-time {
+    background-color: #841055;
+    padding: 6px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    color: aliceblue;
+    font-size: 0.9rem;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-buttons {
+    align-self: self-end;
+    display: flex;
+    gap: 5px;
+    padding: 5px 10px;
+}
+
+
+.todo-buttons button {
+    background: none;
+    font-weight: bold;
+    font-size: larger;
+}
+
+input {
+    background: none;
+}
+
+#todo-time input {
+    color: white;
+}
+
+#add-btn {
+    padding: 10px 20px;
+    background: #841055;
+    color: aliceblue;
+    border: none;
+    box-shadow: 0 1px 6px gray;
+    border-radius: 0.5rem;
+    margin-bottom: 5px;
+}
+
+
+.checkbox-wrapper .round {
+    position: relative;
+}
+
+.checkbox-wrapper .round label {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    display: block;
+}
+
+.checkbox-wrapper .round label:after {
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    content: "";
+    height: 4px;
+    left: 3px;
+    opacity: 0;
+    position: absolute;
+    top: 6px;
+    transform: rotate(-45deg);
+    width: 10px;
+}
+
+.checkbox-wrapper .round input[type="checkbox"] {
+    visibility: hidden;
+    display: none;
+    opacity: 0;
+}
+
+.checkbox-wrapper .round input[type="checkbox"]:checked+label {
+    border-color: #cc8db3;
+    background-color: #cc8db3;
+
+}
+
+.checkbox-wrapper .round input[type="checkbox"]:checked+label:after {
+    opacity: 1;
+}
+
+
+
+#no-todo {
+    display: flex;
+    margin-left: 8rem;
+    margin-top: 5rem;
+    color: #ccc;
+    font-family: sans-serif;
+}
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow: hidden;
+}
+
+
+.drawer-content {
+    background: #f5f5f5;
+    width: 80%;
+    max-width: 350px;
+    height: 100%;
+    padding: 1rem;
+    position: relative;
+    transform: translateX(-100%);
+    animation: slide-in 0.3s forwards;
+    overflow-y: auto;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+}
+
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #841055;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+
+@keyframes slide-in {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+
+
+
+/* Mobile behavior: buttons appear, drawers hidden by default */
+@media screen and (max-width: 1233px) {
+
+    #mobile-controls {
+        display: flex !important;
+        flex-direction: column;
+        align-items:center;
+        gap: 1rem;
+        width: 8%;
+        background-color: #841055;
+        color: #f5f5f5;
+        border-top-right-radius: 30px;
+        border-bottom-right-radius: 30px;
+        height: 90vh;
+        padding-top: 2rem;
+    }
+
+    #side-bar,
+    #tracker {
+        display: none;
+        /* hide original sidebar and tracker */
+    }
+
+    #main-content{
+        width: 90%;
+        padding: 2rem 5rem;
+    }
+    #tracker-btn, #calendar-btn{
+        background: none;
+        font-size: 2rem;
+    }
+}
+
+/* Desktop behavior: buttons hidden, calendar/tracker visible */
+@media screen and (min-width: 1233px) {
+    #mobile-controls {
+        display: none !important;
+        /* hide buttons */
+    }
+
+    #side-bar,
+    #tracker {
+        display: block;
+        /* show calendar/tracker */
+        position: relative;
+        /* normal flow */
+        width: 30%;
+        /* or original widths */
+        height: auto;
+    }
+
+    .overlay {
+        display: none;
+        /* hide overlays on desktop */
+    }
+}
+
+body .drawer-open {
+    overflow: hidden;
+}
+
+@media screen and (max-width: 792px){
+       #main-content {
+        padding: 2rem 3rem;
+    }
+}
+
+@media screen and (max-width: 719px){
+       #main-content {
+        padding: 2rem 1rem;
+    }
+}
+
+@media screen and (max-width: 571px){
+      #todos{
+        min-width: 15rem;
+      }
+}
+
+@media screen and (max-width: 471px){
+      #todos{
+        min-width: 13rem;
+      }
+}
+
+
+
+
+
+
+
+
+
+/* Default icon size */
+#calendar-btn svg,
+#tracker-btn svg {
+  font-size: 26px;
+}
+
+/* When width <= 510px */
+@media (max-width: 510px) {
+  #calendar-btn svg,
+  #tracker-btn svg {
+    font-size: 20px;
+  }
+
+  #calendar-btn,
+  #tracker-btn {
+    padding: 6px;
+  }
+}
+
+@media (max-width: 421px) {
+
+  #all-todos {
+    flex-direction: column; /* stack vertically */
+    gap: 1rem;
+  }
+
+  #all-todos #todo-box {
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+
+
+/* Desktop default */
+html {
+  font-size: 16px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 510px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+/* Very small height devices */
+@media (max-height: 421px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+
+
+
+
+@media (max-height: 560px) {
+  #no-todo{
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}
+
+
+
+
+
+

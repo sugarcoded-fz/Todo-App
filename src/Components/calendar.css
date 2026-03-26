@@ -1,0 +1,61 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+ .my-calendar .rdp-button_previous svg,
+.my-calendar .rdp-button_next svg{
+  fill: purple;
+}
+
+.my-calendar .rdp-button_previous:hover,
+.my-calendar .rdp-button_next:hover {
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+
+.my-calendar .rdp-weekday {
+  font-weight: 600;
+  color: purple;
+}
+
+.my-calendar .rdp-today {
+  color: purple;
+  font-weight: bold;
+}
+
+
+.my-calendar .rdp-selected {
+  background: rgb(148, 81, 148) !important;
+  border-radius: 50%;
+  color: white !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-calendar .rdp-selected .rdp-day_button{
+  border: none;
+}
+
+
+
+
+
+@media screen and (max-width: 402px){
+   .my-calendar{
+    font-size: small;
+   }
+}
+
+
