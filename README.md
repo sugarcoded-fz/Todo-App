@@ -15,3 +15,9 @@ A simple **TODO application** built with **React** to manage your tasks efficien
 - JavaScript
 - HTML & CSS
 - (Optional) LocalStorage for saving tasks
+
+---
+
+##  Live Preview
+
+https://todo-app-fz.vercel.app/
