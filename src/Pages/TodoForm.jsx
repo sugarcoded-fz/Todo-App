@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { context } from './context/context'
 import { v4 as uuidv4 } from 'uuid'
 import './TodoForm.css'

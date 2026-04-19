@@ -1,4 +1,3 @@
-import React from 'react'
 import './progressTracker.css'
 
 const ProgressTracker = (props) => {

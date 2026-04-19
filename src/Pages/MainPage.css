@@ -343,6 +343,11 @@ body .drawer-open {
     overflow: hidden;
 }
 
+
+
+
+
+
 @media screen and (max-width: 792px){
        #main-content {
         padding: 2rem 3rem;
