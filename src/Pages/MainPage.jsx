@@ -30,11 +30,11 @@ const MainPage = () => {
   /* ---------------- UTILS ---------------- */
 
   const formatDate = (d) => {
-    return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+    return `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2,"0")}-${d.getDate().toString().padStart(2,"0")}`;
   }
 
   const getActiveDate = () => {
-    return selected ? selected.toISOString().split("T")[0] : formatDate(new Date());
+    return selected ? formatDate(selected) : formatDate(new Date());
   }
 
   const isSameDay = (t) => {
