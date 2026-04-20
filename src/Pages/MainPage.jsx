@@ -29,24 +29,24 @@ const MainPage = () => {
 
   /* ---------------- UTILS ---------------- */
 
-  const formatDate = (d) =>{
-    `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+  const formatDate = (d) => {
+    return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
   }
 
-  const getActiveDate = () =>{
-    selected ? selected.toISOString().split("T")[0] : formatDate(new Date());
+  const getActiveDate = () => {
+    return selected ? selected.toISOString().split("T")[0] : formatDate(new Date());
   }
 
-  const isSameDay = (t) =>{ 
-    t.date === getActiveDate();
+  const isSameDay = (t) => {
+    return t.date === getActiveDate();
   }
 
-  const getDayName = (d) =>{
-    ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"][new Date(d).getDay()];
+  const getDayName = (d) => {
+    return ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"][new Date(d).getDay()];
   }
 
-  const getMonthName = (d) =>{
-    [
+  const getMonthName = (d) => {
+    return [
       "Jan", "Feb", "March", "April", "May", "June",
       "July", "August", "Sep", "Oct", "Nov", "Dec",
     ][new Date(d).getMonth()];
