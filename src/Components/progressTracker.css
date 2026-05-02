@@ -1,21 +1,103 @@
-.progress-container{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 2rem;
-}
-.progress{
-    position: absolute;
-    top: 9.8rem;
-    font-weight: bold;
-    font-family: sans-serif;
-}
-.title{
-    margin-top: 1rem;
+/* ================= CONTAINER ================= */
+
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+  padding: 10px;
+
+  animation: fadeUp 0.4s ease;
 }
 
-@media screen and (max-width: 1233px){
-    .progress{
-        top: 13rem;
-    }
+/* ================= TITLE ================= */
+
+.progress-container .title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6B7280;
+  text-align: center;
+}
+
+/* ================= SVG ================= */
+
+.progress-container svg {
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+
+.progress-container:hover svg {
+  transform: scale(1.05);
+}
+
+/* ================= CIRCLE BASE ================= */
+
+.progress-container circle:first-child {
+  stroke: #E0D6C3;
+}
+
+/* ================= PROGRESS CIRCLE ================= */
+
+.progress-container circle:last-child {
+  stroke: #536878;
+  filter: drop-shadow(0 0 6px rgba(83, 104, 120, 0.4));
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+/* ================= PERCENT TEXT ================= */
+
+.progress {
+  position: absolute;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1F2933;
+  margin-top: 2rem;
+  margin-left: 0.5rem;
+}
+
+/* ================= WRAP FOR CENTER ALIGN ================= */
+
+.progress-container {
+  position: relative;
+}
+
+/* ================= SMALL LABEL ================= */
+
+.progress::after {
+  content: "completed";
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: #6B7280;
+  margin-top: 2px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+  .progress-container svg {
+    width: 180px;
+    height: 180px;
+  }
+
+  .progress {
+    font-size: 20px;
+    margin-left: 1.5rem;
+    margin-top: 3rem;
+  }
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

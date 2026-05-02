@@ -1,61 +1,148 @@
-* {
-    padding: 0;
-    margin: 0;
-    border: none;
-    box-sizing: border-box;
+/* ================= CONTAINER ================= */
+
+.my-calendar {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
+/* ================= ROOT ================= */
+
+.rdp-root {
+  width: 100%;
 }
 
- .my-calendar .rdp-button_previous svg,
-.my-calendar .rdp-button_next svg{
-  fill: purple;
-}
+/* ================= MONTH WRAPPER ================= */
 
-.my-calendar .rdp-button_previous:hover,
-.my-calendar .rdp-button_next:hover {
-  background-color: #eee;
-  border-radius: 50%;
-}
-
-
-.my-calendar .rdp-weekday {
-  font-weight: 600;
-  color: purple;
-}
-
-.my-calendar .rdp-today {
-  color: purple;
-  font-weight: bold;
-}
-
-
-.my-calendar .rdp-selected {
-  background: rgb(148, 81, 148) !important;
-  border-radius: 50%;
-  color: white !important;
+.rdp-months {
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
-.my-calendar .rdp-selected .rdp-day_button{
+/* ================= MONTH ================= */
+
+.rdp-month {
+  width: 100%;
+}
+
+/* ================= TABLE FIX (MOST IMPORTANT) */
+
+.rdp-month_grid {
+  width: 100%;
+  table-layout: fixed;   /* 🔥 KEY FIX */
+  border-collapse: collapse;
+}
+
+/* ================= HEADER ================= */
+
+.rdp-weekday {
+  text-align: center;
+  font-size: clamp(10px, 0.8vw, 13px);
+  padding: 4px 0;
+  color: #6B7280;
+}
+
+/* ================= DAYS ================= */
+
+.rdp-day {
+  text-align: center;
+  padding: 0;
+}
+
+/* actual clickable button inside day */
+.rdp-day button {
+  width: 100%;
+  aspect-ratio: 1 / 1;  /* 🔥 perfect square */
+  border-radius: 10px;
   border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: clamp(11px, 1vw, 14px);
+  transition: 0.2s ease;
+}
+
+/* ================= HOVER ================= */
+
+.rdp-day button:hover {
+  background: #EAE0C8;
+}
+
+/* ================= SELECTED ================= */
+
+.my-selected {
+  background: #536878 !important;
+  color: white !important;
+}
+
+/* ================= TODAY ================= */
+
+.my-today {
+  border: 1px solid #536878;
+}
+
+/* ================= NAVIGATION ================= */
+
+.rdp-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.rdp-button_previous,
+.rdp-button_next {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.rdp-button_previous:hover,
+.rdp-button_next:hover {
+  transform: scale(1.1);
+}
+
+/* ================= MONTH SWITCH ================= */
+
+.rdp-chevron{
+  fill: #536878;
+}
+
+/* ================= CAPTION ================= */
+
+.rdp-caption_label {
+  font-size: clamp(15px, 1vw, 16px);
+  font-weight: 600;
+  z-index: 0;
+}
+
+/* ================= FOOTER ================= */
+
+.rdp-footer {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 6px;
+  color: #6B7280;
+}
+
+/* ================= REMOVE HIDDEN SPACE ================= */
+
+.rdp-hidden {
+  visibility: hidden;
+}
+
+/* ================= SELECTED BUTTON BG ================= */
+
+.rdp-selected .rdp-day_button{
+  border: none;
+  background: #536878;
+  color: white;
 }
 
 
+/* ================= RESPONSIVE ================= */
 
-
-
-@media screen and (max-width: 402px){
-   .my-calendar{
-    font-size: small;
-   }
+@media (max-width: 900px) {
+  .rdp-day button {
+    border-radius: 8px;
+  }
 }
-
-

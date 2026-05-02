@@ -7,14 +7,7 @@ import { context } from './Pages/context/context'
 
 function App() {
   const [selected, setSelected] = useState()
-  const [Todos, setTodos] = useState(() => {
-    let saved = localStorage.getItem("todos");
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(Todos));
-  }, [Todos]);
+  const [Todos, setTodos] = useState([]);
 
   const router = createBrowserRouter([
     {

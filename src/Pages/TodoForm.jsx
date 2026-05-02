@@ -1,12 +1,11 @@
 import { useState, useContext } from 'react'
 import { context } from './context/context'
-import { v4 as uuidv4 } from 'uuid'
+import axios from "axios";
 import './TodoForm.css'
 
 const TodoForm = () => {
   const { Todos, setTodos } = useContext(context)
   const [Todo, setTodo] = useState({
-    id: "0",
     title: "",
     stime: "",
     date: "",
@@ -40,43 +39,48 @@ const TodoForm = () => {
     setTodo({ ...Todo, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (Object.values(Todo).some(value => value === "") || Todo.title.trim() === "") {
-      alert("Fill all fields..")
-      return
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (Object.values(Todo).some(v => v === "") || Todo.title.trim() === "") {
+      alert("Fill all fields..");
+      return;
     }
+
     if (Todo.stime >= Todo.etime) {
-      alert("Start time cannot be greater than or equal to end time.")
-      return
-    }
-    if (isOverlapping(Todos, Todo)) {
-      alert("This time overlaps with another task on the same day!");
+      alert("Start time cannot be greater than or equal to end time.");
       return;
     }
-    if (isTitleOverlap(Todos, Todo)) {
-      alert("This task already exist on same day!");
-      return;
-    }
+
     const newTodo = {
-      ...Todo,
-      id: uuidv4()
+      ...Todo
+    };
+
+    try {
+      const res = await axios.post( process.env.NEXT_PUBLIC_API_URL , Todo);
+
+       // setTodos([...Todos, res.data]);
+      setTodos([...Todos, { ...res.data, id: res.data._id }]);
+
+      setTodo({
+        title: "",
+        date: "",
+        stime: "",
+        etime: "",
+        isCompleted: false
+      });
+
+    } catch (err) {
+      alert(err.response?.data?.message || "Error adding task");
     }
-    setTodos([...Todos, newTodo])
-    setTodo({
-      id: "0",
-      title: "",
-      date: "",
-      stime: "",
-      etime: "",
-      isCompleted: false
-    })
-  }
+  };
 
   return (
     <div className='todo-form'>
       <div className='content-box'>
-        <form action="" onSubmit={handleSubmit}>
+        <form action="" onSubmit={handleSubmit} className='form-card'>
           <h2>Add Task</h2>
           <div className='input-field'>
             <span>Label</span>

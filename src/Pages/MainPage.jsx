@@ -7,6 +7,7 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegCircleXmark } from "react-icons/fa6";
 import { CiCalendar } from "react-icons/ci";
 import { TbProgressCheck } from "react-icons/tb";
+import axios from "axios";
 
 import "./MainPage.css";
 import ProgressTracker from "../Components/ProgressTracker";
@@ -27,10 +28,11 @@ const MainPage = () => {
     etime: "",
   });
 
+
   /* ---------------- UTILS ---------------- */
 
   const formatDate = (d) => {
-    return `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2,"0")}-${d.getDate().toString().padStart(2,"0")}`;
+    return `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
   }
 
   const getActiveDate = () => {
@@ -65,6 +67,19 @@ const MainPage = () => {
     );
   }, [showCalendarDrawer, showTrackerDrawer]);
 
+  useEffect(() => {
+    const date = getActiveDate();
+
+    axios.get(`${process.env.NEXT_PUBLIC_API_URL}?date=${date}`)
+      .then(res => {
+        const fixed = res.data.map(t => ({
+          ...t,
+          id: t._id
+        }));
+        setTodos(fixed);
+      });
+  }, [selected]);
+
   /* ---------------- LOGIC ---------------- */
 
   const calculateProgress = (list) => {
@@ -74,21 +89,59 @@ const MainPage = () => {
     setprogress(todays.length ? (completed / todays.length) * 100 : 0);
   };
 
-  const handleDelete = (id) =>
+  // const handleDelete = (id) =>
+  //   setTodos(Todos.filter((t) => t.id !== id));
+  const handleDelete = async (id) => {
+    await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/${id}`);
     setTodos(Todos.filter((t) => t.id !== id));
-
-  const saveUpdate = (id) => {
-    setTodos(
-      Todos.map((t) => (t.id === id ? { ...t, ...Updated } : t))
-    );
-    setEditId(null);
   };
 
-  const handleCheckbox = (e) => {
+  // const saveUpdate = (id) => {
+  //   setTodos(
+  //     Todos.map((t) => (t.id === id ? { ...t, ...Updated } : t))
+  //   );
+  //   setEditId(null);
+  // };
+  const saveUpdate = async (id) => {
+    try {
+      const res = await axios.put(
+        `${process.env.NEXT_PUBLIC_API_URL}/${id}`,
+        Updated
+      );
+
+      const updatedTodos = Todos.map(t =>
+        t.id === id ? { ...res.data, id: res.data._id } : t
+      );
+
+      setTodos(updatedTodos);
+      setEditId(null);
+    } catch (err) {
+      alert(err.response?.data?.message || "Error adding task");
+    }
+  };
+
+
+  // const handleCheckbox = (e) => {
+  //   const id = e.target.name;
+
+  //   const updatedTodos = Todos.map((t) =>
+  //     t.id === id ? { ...t, isCompleted: !t.isCompleted } : t
+  //   );
+
+  //   setTodos(updatedTodos);
+  // };
+  const handleCheckbox = async (e) => {
     const id = e.target.name;
 
-    const updatedTodos = Todos.map((t) =>
-      t.id === id ? { ...t, isCompleted: !t.isCompleted } : t
+    const todo = Todos.find(t => t.id === id);
+
+    const res = await axios.patch(
+      `${process.env.NEXT_PUBLIC_API_URL}/${id}`,
+      { isCompleted: !todo.isCompleted }
+    );
+
+    const updatedTodos = Todos.map(t =>
+      t.id === id ? { ...res.data, id: res.data._id } : t
     );
 
     setTodos(updatedTodos);
@@ -100,11 +153,9 @@ const MainPage = () => {
     const d = selected || new Date();
 
     return (
-      <div style={{ display: "flex", alignItems: "end", gap: "0.5rem" }}>
-        <div style={{ fontWeight: "bold", fontSize: "1.4rem" }}>
-          {getDayName(d)}
-        </div>
-        <div>
+      <div className="full-day">
+        <div className="day-name">{getDayName(d)}</div>
+        <div className="date-text">
           {d.getFullYear()},{d.getDate()} {getMonthName(d)}
         </div>
       </div>
@@ -144,16 +195,20 @@ const MainPage = () => {
         {/* Mobile buttons */}
         <div
           id="mobile-controls"
-          style={{
-            display:
-              showCalendarDrawer || showTrackerDrawer ? "none" : "flex",
-          }}
         >
-          <button id="calendar-btn" onClick={() => setShowCalendarDrawer(true)}>
-            <CiCalendar color="white" strokeWidth={0.5} />
+          <button id="calendar-btn"
+            onClick={() => {
+              setShowCalendarDrawer(true);
+              setShowTrackerDrawer(false);
+            }}>
+            <CiCalendar color="white" strokeWidth={0.5} size={20} />
           </button>
-          <button id="tracker-btn" onClick={() => setShowTrackerDrawer(true)}>
-            <TbProgressCheck color="white" strokeWidth={1.5} />
+          <button id="tracker-btn"
+            onClick={() => {
+              setShowTrackerDrawer(true);
+              setShowCalendarDrawer(false);
+            }}>
+            <TbProgressCheck color="white" strokeWidth={1.5} size={20} />
           </button>
         </div>
 
@@ -328,7 +383,8 @@ const MainPage = () => {
 
         {/* Tracker */}
         {showTrackerDrawer ? (
-          <div className="overlay" onClick={() => setShowTrackerDrawer(false)}>
+          <div className="overlay"
+            onClick={() => setShowTrackerDrawer(false)}>
             <div className="drawer-content" onClick={(e) => e.stopPropagation()}>
               <ProgressTracker progress={progress} />
             </div>

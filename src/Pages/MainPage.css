@@ -1,465 +1,366 @@
-* {
-    padding: 0;
-    margin: 0;
-    border: none;
-    box-sizing: border-box;
+/* ================= DESIGN SYSTEM ================= */
+
+:root {
+  --bg: #F5F1E8;
+  --card: #FFFFFF;
+  --border: #E0D6C3;
+
+  --primary: #536878;
+  --primary-hover: #3E4F5C;
+
+  --text-main: #1F2933;
+  --text-secondary: #6B7280;
+
+  --accent-soft: #EAE0C8;
+
+  --radius: 14px;
 }
 
-html,
+/* ================= BASE ================= */
+
 body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(to bottom right, #F5F1E8, #EAE0C8);
+  color: var(--text-main);
+  font-size: clamp(14px, 1vw, 16px);
 }
 
-
-
+/* ================= HEADER ================= */
 
 #title {
-    display: flex;
-    align-items: end;
-    gap: 0.5rem;
-    padding: 1rem;
+  padding: 20px 30px 10px;
 }
 
 #logo {
-    color: purple;
-    font-size: xx-large;
+  /* font-size: 24px; */
+  font-weight: 600;
+  font-size: clamp(20px, 2vw, 28px);
 }
 
 #logo-desc {
-    font-size: 0.9rem;
+  font-size: 13px;
+  color: var(--text-secondary);
 }
 
-
-
+/* ================= LAYOUT ================= */
 
 #content-box {
-    display: flex;
-    justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 20px;
+  padding: 20px;
 }
 
-#side-bar {
-    width: 30%;
-    height: 60vh;
-    border-radius: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5%;
-    padding: 0 1rem;
+/* ================= SIDEBAR + TRACKER ================= */
+
+#side-bar,
+#tracker {
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 16px;
+
+  animation: fadeIn 0.4s ease;
 }
+
+/* ================= MAIN ================= */
 
 #main-content {
-    width: 50%;
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 20px;
+  font-size: clamp(14px, 1.1vw, 17px);
+
+  animation: fadeUp 0.4s ease;
 }
 
-#tracker {
-    width: 25%;
-    margin-top: 5%;
-    padding: 0 1rem;
-}
-
-
-
+/* ================= TOP BAR ================= */
 
 #main-top {
-    height: 30%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.full-day {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
 }
 
+/* Day (Mon, Tue) */
+.day-name {
+  font-weight: bold;
+  font-size: clamp(18px, 2vw, 26px);
+}
+
+/* Date */
+.date-text {
+  font-size: clamp(12px, 1vw, 16px);
+  color: var(--text-secondary);
+}
+
+/* ================= BUTTON ================= */
+
+#add-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: clamp(12px, 1vw, 15px);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#add-btn:hover {
+  background: var(--primary-hover);
+  transform: scale(1.05);
+}
+
+/* ================= TITLE ROW ================= */
+
 #main-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 #task-title {
-    font-size: larger;
-
+  /* font-size: 18px; */
+   font-size: clamp(16px, 1.5vw, 22px);
+  font-weight: 600;
 }
 
-
-
-#all-todos {
-    display: flex;
-    justify-content: space-between;
+#showCompletedBox{
+  display: flex;
+  gap: 5px;
 }
+
+/* ================= TODOS ================= */
 
 #todo-box {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-#showCompletedBox {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  margin-top: 10px;
 }
 
 #todos {
-    display: flex;
-    justify-content: space-between;
-    background-color: #cc8db3;
-    min-width: 17rem;
-    border-radius: 10px;
-    padding: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: #FAFAFA;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  padding: 12px 14px;
+  margin-bottom: 10px;
+
+  transition: 0.25s ease;
 }
 
-#todo-right {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+#todos:hover {
+  background: var(--accent-soft);
+  transform: translateY(-2px);
 }
+
+/* LEFT */
 
 #todo-left {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 0 10px;
-    font-size: large;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* RIGHT */
+
+#todo-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 #todo-time {
-    background-color: #841055;
-    padding: 6px;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    color: aliceblue;
-    font-size: 0.9rem;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
+  /* font-size: 13px; */
+  color: var(--text-secondary);
+  font-size: clamp(12px, 0.9vw, 14px);
 }
 
-.todo-buttons {
-    align-self: self-end;
-    display: flex;
-    gap: 5px;
-    padding: 5px 10px;
+/* ================= BUTTONS ================= */
+.todo-buttons{
+  display: flex;
+  gap: 2px;
 }
-
 
 .todo-buttons button {
-    background: none;
-    font-weight: bold;
-    font-size: larger;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+
+  transition: 0.2s;
 }
+
+.todo-buttons button:hover {
+  transform: scale(1.2);
+  color: var(--primary);
+}
+
+/* ================= INPUT ================= */
 
 input {
-    background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 5px;
 }
 
-#todo-time input {
-    color: white;
+input:focus {
+  outline: none;
+  border-color: var(--primary);
 }
 
-#add-btn {
-    padding: 10px 20px;
-    background: #841055;
-    color: aliceblue;
-    border: none;
-    box-shadow: 0 1px 6px gray;
-    border-radius: 0.5rem;
-    margin-bottom: 5px;
+/* ================= CHECKBOX ================= */
+
+
+.checkbox-wrapper input {
+  visibility: hidden;
 }
 
-
-.checkbox-wrapper .round {
-    position: relative;
+.checkbox-wrapper label {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  display: inline-block;
+  cursor: pointer;
 }
 
-.checkbox-wrapper .round label {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 50%;
-    cursor: pointer;
-    height: 20px;
-    width: 20px;
-    display: block;
+.checkbox-wrapper input:checked + label {
+  background: var(--primary);
 }
 
-.checkbox-wrapper .round label:after {
-    border: 2px solid #fff;
-    border-top: none;
-    border-right: none;
-    content: "";
-    height: 4px;
-    left: 3px;
-    opacity: 0;
-    position: absolute;
-    top: 6px;
-    transform: rotate(-45deg);
-    width: 10px;
-}
-
-.checkbox-wrapper .round input[type="checkbox"] {
-    visibility: hidden;
-    display: none;
-    opacity: 0;
-}
-
-.checkbox-wrapper .round input[type="checkbox"]:checked+label {
-    border-color: #cc8db3;
-    background-color: #cc8db3;
-
-}
-
-.checkbox-wrapper .round input[type="checkbox"]:checked+label:after {
-    opacity: 1;
-}
-
-
+/* ================= EMPTY ================= */
 
 #no-todo {
-    display: flex;
-    margin-left: 8rem;
-    margin-top: 5rem;
-    color: #ccc;
-    font-family: sans-serif;
+  text-align: center;
+  margin-top: 30px;
+  color: var(--text-secondary);
 }
 
+/* ================= MOBILE CONTROLS ================= */
+
+#mobile-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  gap: 15px;
+  z-index: 1000;
+}
+
+#mobile-controls button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+}
+
+/* ================= DRAWER ================= */
 
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 9999;
-    display: flex;
-    justify-content: flex-start;
-    align-items: stretch;
-    overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 5000;
 }
-
 
 .drawer-content {
-    background: #f5f5f5;
-    width: 80%;
-    max-width: 350px;
-    height: 100%;
-    padding: 1rem;
-    position: relative;
-    transform: translateX(-100%);
-    animation: slide-in 0.3s forwards;
-    overflow-y: auto;
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 75%;
+  max-width: 300px;
+  height: 100%;
+
+  background: var(--card);
+  padding: 16px;
+
+  border-right: 1px solid var(--border);
+
+  animation: slideIn 0.3s ease;
 }
 
+/* ================= RESPONSIVE ================= */
 
-.close-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: #841055;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
-    font-size: 1.2rem;
-    cursor: pointer;
+@media (max-width: 900px) {
+  #content-box {
+    grid-template-columns: 1fr;
+  }
+
+  #side-bar,
+  #tracker {
+    display: none;
+  }
+
+  #mobile-controls {
+    display: flex;
+  }
+
+  #todos {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  #todo-right {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
+@media (max-width: 600px) {
+  .full-day {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
 
-@keyframes slide-in {
-    from {
-        transform: translateX(-100%);
-    }
-
-    to {
-        transform: translateX(0);
-    }
-}
-
-
-
-
-/* Mobile behavior: buttons appear, drawers hidden by default */
-@media screen and (max-width: 1233px) {
-
-    #mobile-controls {
-        display: flex !important;
-        flex-direction: column;
-        align-items:center;
-        gap: 1rem;
-        width: 8%;
-        background-color: #841055;
-        color: #f5f5f5;
-        border-top-right-radius: 30px;
-        border-bottom-right-radius: 30px;
-        height: 90vh;
-        padding-top: 2rem;
-    }
-
-    #side-bar,
-    #tracker {
-        display: none;
-        /* hide original sidebar and tracker */
-    }
-
-    #main-content{
-        width: 90%;
-        padding: 2rem 5rem;
-    }
-    #tracker-btn, #calendar-btn{
-        background: none;
-        font-size: 2rem;
-    }
-}
-
-/* Desktop behavior: buttons hidden, calendar/tracker visible */
-@media screen and (min-width: 1233px) {
-    #mobile-controls {
-        display: none !important;
-        /* hide buttons */
-    }
-
-    #side-bar,
-    #tracker {
-        display: block;
-        /* show calendar/tracker */
-        position: relative;
-        /* normal flow */
-        width: 30%;
-        /* or original widths */
-        height: auto;
-    }
-
-    .overlay {
-        display: none;
-        /* hide overlays on desktop */
-    }
-}
-
-body .drawer-open {
-    overflow: hidden;
-}
-
-
-
-
-
-
-@media screen and (max-width: 792px){
-       #main-content {
-        padding: 2rem 3rem;
-    }
-}
-
-@media screen and (max-width: 719px){
-       #main-content {
-        padding: 2rem 1rem;
-    }
-}
-
-@media screen and (max-width: 571px){
-      #todos{
-        min-width: 15rem;
-      }
-}
-
-@media screen and (max-width: 471px){
-      #todos{
-        min-width: 13rem;
-      }
-}
-
-
-
-
-
-
-
-
-
-/* Default icon size */
-#calendar-btn svg,
-#tracker-btn svg {
-  font-size: 26px;
-}
-
-/* When width <= 510px */
-@media (max-width: 510px) {
-  #calendar-btn svg,
-  #tracker-btn svg {
+  .day-name {
     font-size: 20px;
   }
 
-  #calendar-btn,
-  #tracker-btn {
-    padding: 6px;
-  }
-}
-
-@media (max-width: 421px) {
-
-  #all-todos {
-    flex-direction: column; /* stack vertically */
-    gap: 1rem;
-  }
-
-  #all-todos #todo-box {
-    width: 100%;
-  }
-}
-
-
-
-
-
-
-
-
-/* Desktop default */
-html {
-  font-size: 16px;
-}
-
-/* Tablet */
-@media (max-width: 1024px) {
-  html {
-    font-size: 15px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  html {
-    font-size: 14px;
-  }
-}
-
-/* Small mobile */
-@media (max-width: 510px) {
-  html {
-    font-size: 13px;
-  }
-}
-
-/* Very small height devices */
-@media (max-height: 421px) {
-  html {
+  .date-text {
     font-size: 12px;
   }
 }
 
+/* ================= ANIMATIONS ================= */
 
-
-
-
-@media (max-height: 560px) {
-  #no-todo{
-    margin-left: 2rem;
-    margin-right: 2rem;
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}

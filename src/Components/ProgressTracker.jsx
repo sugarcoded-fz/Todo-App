@@ -17,7 +17,7 @@ const ProgressTracker = (props) => {
                     cx="100"
                     cy="100"
                     r={radius}
-                    stroke='#eee'
+                    stroke="#E0D6C3"
                     strokeWidth={stroke}
                     fill='none'
                 />
@@ -26,7 +26,7 @@ const ProgressTracker = (props) => {
                     cx="100"
                     cy="100"
                     r={radius}
-                    stroke='purple'
+                    stroke="#536878"
                     strokeWidth={stroke}
                     fill='none'
                     strokeDasharray={circumference}

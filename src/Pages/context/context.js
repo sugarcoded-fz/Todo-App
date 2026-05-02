@@ -1,6 +1,6 @@
 import { createContext } from "react";
 export const context = createContext({
-    Todos: [],
+    todos: [],
     setTodos: () => { },
 
     selected: null,
