@@ -19,6 +19,8 @@ app.use(cors({
 }));
 app.use(express.json());
 
+const PORT = process.env.PORT;
+
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
@@ -134,4 +136,4 @@ app.patch("/todos/:id", async (req, res) => {
   }
 });
 
-app.listen(5000, () => console.log("App listening on port 5000"));
+app.listen(PORT, () => console.log(`App listening on port ${PORT} `));

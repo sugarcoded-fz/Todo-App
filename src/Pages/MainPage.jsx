@@ -70,7 +70,7 @@ const MainPage = () => {
   useEffect(() => {
     const date = getActiveDate();
 
-    axios.get(`${process.env.NEXT_PUBLIC_API_URL}?date=${date}`)
+    axios.get(`${import.meta.env.VITE_API_URL}/todos?date=${date}`)
       .then(res => {
         const fixed = res.data.map(t => ({
           ...t,
@@ -92,7 +92,7 @@ const MainPage = () => {
   // const handleDelete = (id) =>
   //   setTodos(Todos.filter((t) => t.id !== id));
   const handleDelete = async (id) => {
-    await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/${id}`);
+    await axios.delete(`${import.meta.env.VITE_API_URL}/todos/${id}`);
     setTodos(Todos.filter((t) => t.id !== id));
   };
 
@@ -105,7 +105,7 @@ const MainPage = () => {
   const saveUpdate = async (id) => {
     try {
       const res = await axios.put(
-        `${process.env.NEXT_PUBLIC_API_URL}/${id}`,
+        `${import.meta.env.VITE_API_URL}/todos/${id}`,
         Updated
       );
 
@@ -136,7 +136,7 @@ const MainPage = () => {
     const todo = Todos.find(t => t.id === id);
 
     const res = await axios.patch(
-      `${process.env.NEXT_PUBLIC_API_URL}/${id}`,
+      `${import.meta.env.VITE_API_URL}/todos/${id}`,
       { isCompleted: !todo.isCompleted }
     );
 

@@ -59,7 +59,7 @@ const TodoForm = () => {
     };
 
     try {
-      const res = await axios.post( process.env.NEXT_PUBLIC_API_URL , Todo);
+      const res = await axios.post( `${import.meta.env.VITE_API_URL}/todos` , Todo);
 
        // setTodos([...Todos, res.data]);
       setTodos([...Todos, { ...res.data, id: res.data._id }]);
