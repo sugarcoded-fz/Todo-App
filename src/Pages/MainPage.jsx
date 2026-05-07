@@ -70,7 +70,7 @@ const MainPage = () => {
   useEffect(() => {
     const date = getActiveDate();
 
-    axios.get(`${import.meta.env.VITE_API_URL}/todos?date=${date}`)
+    axios.get(`/api/todos?date=${date}`)
       .then(res => {
         const fixed = res.data.map(t => ({
           ...t,
@@ -89,23 +89,17 @@ const MainPage = () => {
     setprogress(todays.length ? (completed / todays.length) * 100 : 0);
   };
 
-  // const handleDelete = (id) =>
-  //   setTodos(Todos.filter((t) => t.id !== id));
+
   const handleDelete = async (id) => {
-    await axios.delete(`${import.meta.env.VITE_API_URL}/todos/${id}`);
+    await axios.delete(`/api/todos/${id}`);
     setTodos(Todos.filter((t) => t.id !== id));
   };
 
-  // const saveUpdate = (id) => {
-  //   setTodos(
-  //     Todos.map((t) => (t.id === id ? { ...t, ...Updated } : t))
-  //   );
-  //   setEditId(null);
-  // };
+
   const saveUpdate = async (id) => {
     try {
       const res = await axios.put(
-        `${import.meta.env.VITE_API_URL}/todos/${id}`,
+        `/api/todos/${id}`,
         Updated
       );
 
@@ -121,22 +115,13 @@ const MainPage = () => {
   };
 
 
-  // const handleCheckbox = (e) => {
-  //   const id = e.target.name;
-
-  //   const updatedTodos = Todos.map((t) =>
-  //     t.id === id ? { ...t, isCompleted: !t.isCompleted } : t
-  //   );
-
-  //   setTodos(updatedTodos);
-  // };
   const handleCheckbox = async (e) => {
     const id = e.target.name;
 
     const todo = Todos.find(t => t.id === id);
 
     const res = await axios.patch(
-      `${import.meta.env.VITE_API_URL}/todos/${id}`,
+      `/api/todos/${id}`,
       { isCompleted: !todo.isCompleted }
     );
 
