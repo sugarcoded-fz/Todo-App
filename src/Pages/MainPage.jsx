@@ -7,11 +7,15 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegCircleXmark } from "react-icons/fa6";
 import { CiCalendar } from "react-icons/ci";
 import { TbProgressCheck } from "react-icons/tb";
-import axios from "axios";
+import { CgProfile } from "react-icons/cg";
+import axios from "../utils/api";
 
 import "./MainPage.css";
 import ProgressTracker from "../Components/ProgressTracker";
 import Calendarrr from "../Components/Calendarrr";
+import { useNavigate } from "react-router-dom";
+
+
 
 const MainPage = () => {
   const { selected, setSelected, Todos, setTodos } = useContext(context);
@@ -37,6 +41,7 @@ const MainPage = () => {
 
   const getActiveDate = () => {
     return selected ? formatDate(selected) : formatDate(new Date());
+
   }
 
   const isSameDay = (t) => {
@@ -70,14 +75,22 @@ const MainPage = () => {
   useEffect(() => {
     const date = getActiveDate();
 
-    axios.get(`/api/todos?date=${date}`)
-      .then(res => {
-        const fixed = res.data.map(t => ({
-          ...t,
-          id: t._id
-        }));
-        setTodos(fixed);
-      });
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken) {
+      return;
+    }
+
+    axios.get(`/todos?date=${date}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    }).then(res => {
+      const fixed = res.data.map(t => ({
+        ...t,
+        id: t._id
+      }));
+      setTodos(fixed);
+    });
   }, [selected]);
 
   /* ---------------- LOGIC ---------------- */
@@ -91,17 +104,26 @@ const MainPage = () => {
 
 
   const handleDelete = async (id) => {
-    await axios.delete(`/api/todos/${id}`);
+    const accessToken = localStorage.getItem("accessToken");
+
+    await axios.delete(`/todos/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
     setTodos(Todos.filter((t) => t.id !== id));
   };
 
 
   const saveUpdate = async (id) => {
     try {
-      const res = await axios.put(
-        `/api/todos/${id}`,
-        Updated
-      );
+      const accessToken = localStorage.getItem("accessToken");
+
+      const res = await axios.put(`/todos/${id}`, Updated, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
 
       const updatedTodos = Todos.map(t =>
         t.id === id ? { ...res.data, id: res.data._id } : t
@@ -110,7 +132,7 @@ const MainPage = () => {
       setTodos(updatedTodos);
       setEditId(null);
     } catch (err) {
-      alert(err.response?.data?.message || "Error adding task");
+      alert(err.response?.data?.message || "Error updating task");
     }
   };
 
@@ -120,9 +142,15 @@ const MainPage = () => {
 
     const todo = Todos.find(t => t.id === id);
 
+    const accessToken = localStorage.getItem("accessToken");
     const res = await axios.patch(
-      `/api/todos/${id}`,
-      { isCompleted: !todo.isCompleted }
+      `/todos/${id}`,
+      { isCompleted: !todo.isCompleted },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }
     );
 
     const updatedTodos = Todos.map(t =>
@@ -147,6 +175,9 @@ const MainPage = () => {
     );
   };
 
+  const accessToken = localStorage.getItem("accessToken");
+  const navigate = useNavigate();
+
   /* ---------------- FILTERED TODOS ---------------- */
 
   const todaysTodos = Todos.filter(isSameDay);
@@ -158,8 +189,25 @@ const MainPage = () => {
   return (
     <>
       <div id="title">
-        <div id="logo">iTask</div>
-        <p id="logo-desc">Manage your todos at one place</p>
+        <div>
+          <div id="logo">iTask</div>
+          <p id="logo-desc">Manage your todos at one place</p>
+        </div>
+
+        <div id="navigations">
+          {!accessToken ? (
+            <>
+              <button id="login-btn" onClick={() => navigate("/login")}>Login</button>
+              <button id="register-btn" onClick={() => navigate("/register")}>Register</button>
+            </>
+          ) : (
+            <>
+              <button id="profile-btn" onClick={() => navigate("/profile")}>
+                <CgProfile />
+              </button>
+            </>
+          )}
+        </div>
       </div>
 
       <div id="content-box">
@@ -256,7 +304,15 @@ const MainPage = () => {
                       </div>
 
                       <div className="todo-buttons">
-                        <button onClick={() => saveUpdate(t.id)}>
+                        <button
+                          onClick={() => saveUpdate(t.id)}
+                          disabled={
+                            Updated.title.length < 3 ||
+                            !Updated.stime ||
+                            !Updated.etime ||
+                            Updated.stime >= Updated.etime
+                          }
+                        >
                           <FaRegCheckCircle />
                         </button>
                         <button onClick={() => setEditId(null)}>

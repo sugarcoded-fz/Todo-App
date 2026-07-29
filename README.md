@@ -1,20 +1,41 @@
-# React TODO App
+# 📝 Full Stack TODO App
 
-A simple **TODO application** built with **React** to manage your tasks efficiently. Add, delete, and mark tasks as complete with a clean, interactive interface.
+A modern **full-stack TODO application** with user authentication, built using **React, Node.js, Express, and MongoDB**.  
+Users can securely manage their personal tasks with a clean and responsive interface.
 
-## Features
+---
 
+## ✨ Features
+
+### 🔐 Authentication
+- User signup & login
+- Secure password handling
+- Token-based authentication (JWT)
+
+### 📋 Task Management
 - Add new tasks
 - Mark tasks as completed
 - Delete tasks
-- Responsive design
+- User-specific tasks (each user sees only their own)
 
-## Technologies Used
+### ⚡ Performance & UX
+- Fast frontend powered by Vite + React
+- Responsive UI for all devices
+- RESTful API integration
 
-- React
-- JavaScript
-- HTML & CSS
-- (Optional) LocalStorage for saving tasks
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- React (Vite)
+- Axios
+- CSS
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB (Mongoose)
 
 ---
 

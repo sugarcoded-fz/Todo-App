@@ -1,0 +1,212 @@
+/* Page */
+.profile-page {
+    min-height: 100vh;
+    background: #f5f7fb;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Card */
+.profile-card {
+    width: 100%;
+    max-width: 700px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 16px;
+}
+
+.profile-header h2 {
+    margin: 0;
+    font-size: 22px;
+    text-align: start;
+}
+
+.email {
+    color: #777;
+    font-size: 14px;
+}
+
+.user-id {
+    font-size: 12px;
+    color: #aaa;
+}
+
+/* Stats */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.stat-box {
+    background: #f9fafc;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+}
+
+.stat-box p {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 6px;
+}
+
+.stat-box h3 {
+    margin: 0;
+    font-size: 22px;
+}
+
+/* Colors */
+.stat-box.completed {
+    background: #e8f8f0;
+}
+
+.stat-box.completed h3 {
+    color: #1aa36f;
+}
+
+.stat-box.pending {
+    background: #fff4e5;
+}
+
+.stat-box.pending h3 {
+    color: #d48806;
+}
+
+/* Account Section */
+.account-section {
+    margin-top: 24px;
+}
+
+.account-section h4 {
+    margin-bottom: 10px;
+}
+
+.account-box {
+    background: #f9fafc;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.logout-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #ff4d4f;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.logout-btn:hover {
+    background: #d9363e;
+}
+
+/* Loading */
+.loading {
+    padding: 40px;
+    text-align: center;
+}
+
+
+
+
+/* ========================= */
+/* 📱 MOBILE (<= 600px) */
+/* ========================= */
+@media (max-width: 600px) {
+
+    .profile-page {
+        padding: 20px 10px;
+    }
+
+    .profile-card {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .profile-header h2 {
+        font-size: 20px;
+    }
+
+    .user-id {
+        font-size: 11px;
+    }
+
+    /* Stack stats */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .stat-box {
+        padding: 14px;
+    }
+
+    .stat-box h3 {
+        font-size: 20px;
+    }
+
+    .account-box {
+        font-size: 13px;
+    }
+}
+
+
+/* ========================= */
+/* 📲 TABLET (601px - 900px) */
+/* ========================= */
+@media (max-width: 900px) {
+
+    .profile-card {
+        max-width: 90%;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* ========================= */
+/* 💻 LARGE SCREENS (1200px+) */
+/* ========================= */
+@media (min-width: 1200px) {
+
+    .profile-card {
+        max-width: 800px;
+        padding: 30px;
+    }
+
+    .stat-box h3 {
+        font-size: 26px;
+    }
+}

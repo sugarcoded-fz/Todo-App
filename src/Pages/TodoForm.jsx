@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
 import { context } from './context/context'
-import axios from "axios";
+import axios from '../utils/api';
 import './TodoForm.css'
 
 const TodoForm = () => {
@@ -59,9 +59,15 @@ const TodoForm = () => {
     };
 
     try {
-      const res = await axios.post( `/api/todos` , Todo);
+      const accessToken = localStorage.getItem("accessToken");
 
-       // setTodos([...Todos, res.data]);
+      const res = await axios.post(`/todos`, Todo, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+
+      // setTodos([...Todos, res.data]);
       setTodos([...Todos, { ...res.data, id: res.data._id }]);
 
       setTodo({

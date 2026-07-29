@@ -1,11 +1,15 @@
 import mongoose from "mongoose";
 
 const todoSchema = new mongoose.Schema({
-  title: String,
   date: String,
   stime: String,
   etime: String,
-  isCompleted: Boolean
+  title: String,
+  isCompleted: Boolean,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  }
 });
 
 export default mongoose.model("Todo", todoSchema);
